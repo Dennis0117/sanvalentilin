@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff99cc, #ff3366);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            font-size: 24px;
+            color: white;
+            background-color: #ff3366;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            background-color: #ff6699;
+            transform: scale(1.1);
+        }
+
+        .response {
+            font-size: 30px;
+            margin-top: 40px;
+            opacity: 0;
+            transition: opacity 1s;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .response.show {
+            opacity: 1;
+        }
+
+        .heart {
+            margin-top: 30px;
+            font-size: 50px;
+            color: #ff6666;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Girasoles */
+        .girasol {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://www.transparenttextures.com/patterns/girasol.jpg'); /* Aquí puedes usar una imagen de girasol */
+            background-size: cover;
+            background-position: center;
+            animation: aparecerGirasoles 2s ease-out forwards;
+        }
+
+        @keyframes aparecerGirasoles {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Acomodar los girasoles en diferentes lugares */
+        .girasol1 { top: 20%; left: 10%; }
+        .girasol2 { top: 30%; left: 80%; }
+        .girasol3 { top: 70%; left: 40%; }
+        .girasol4 { top: 60%; left: 15%; }
+        .girasol5 { top: 50%; left: 60%; }
+
+        /* Estilo para el mensaje largo */
+        .mensaje-extra {
+            font-size: 20px;
+            margin-top: 30px;
+            color: #ffccff;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+
+        .mensaje-extra.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        
+        <div class="buttons-container">
+            <button class="button" onclick="mostrarRespuesta('si')">Sí</button>
+            <button class="button" onclick="mostrarRespuesta('no')">No</button>
+        </div>
+
+        <div class="response" id="respuesta"></div>
+        <div class="heart" id="corazon">❤️</div>
+        <div class="mensaje-extra" id="mensajeExtra"></div>
+    </div>
+
+    <script>
+        function mostrarRespuesta(respuesta) {
+            var mensaje = '';
+            var corazon = document.getElementById('corazon');
+            var respuestaDiv = document.getElementById('respuesta');
+            var mensajeExtra = document.getElementById('mensajeExtra');
+            var body = document.body;
+
+            // Eliminar los girasoles si ya están presentes
+            var girasolesExistentes = document.querySelectorAll('.girasol');
+            girasolesExistentes.forEach(function(girasol) {
+                girasol.remove();
+            });
+
+            if (respuesta === 'si') {
+                mensaje = '¡Eres muy especial para mí!';
+                corazon.style.color = '#ff3366';  // Rojo cuando es un sí
+
+                // Mostrar el mensaje largo
+                mensajeExtra.innerText = "Marivi, tú siempre serás una gran mujer en mi vida y que vale toda la pena del mundo, siempre voy a desear o tratar de verte feliz.";
+                mensajeExtra.classList.add('show');
+
+                // Crear y agregar los girasoles
+                agregarGirasoles();
+            } else if (respuesta === 'no') {
+                mensaje = '¡Aún así eres genial!';
+                corazon.style.color = '#cccccc';  // Gris cuando es un no
+
+                // Eliminar el mensaje largo si existe
+                mensajeExtra.classList.remove('show');
+            }
+
+            // Mostrar mensaje y animar respuesta
+            respuestaDiv.innerText = mensaje;
+            respuestaDiv.classList.add('show');
+        }
+
+        function agregarGirasoles() {
+            var girasol1 = document.createElement('div');
+            girasol1.classList.add('girasol', 'girasol1');
+            document.body.appendChild(girasol1);
+
+            var girasol2 = document.createElement('div');
+            girasol2.classList.add('girasol', 'girasol2');
+            document.body.appendChild(girasol2);
+
+            var girasol3 = document.createElement('div');
+            girasol3.classList.add('girasol', 'girasol3');
+            document.body.appendChild(girasol3);
+
+            var girasol4 = document.createElement('div');
+            girasol4.classList.add('girasol', 'girasol4');
+            document.body.appendChild(girasol4);
+
+            var girasol5 = document.createElement('div');
+            girasol5.classList.add('girasol', 'girasol5');
+            document.body.appendChild(girasol5);
+        }
+    </script>
+</body>
+</html>
